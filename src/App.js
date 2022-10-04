@@ -62,6 +62,12 @@ function App() {
     setEditarTarea(null);
   }
 
+  // Función flecha para eliminar una tarea de la lista
+  function eliminarTarea(id) {
+    let actualizaTareas = [...tareas].filter((tarea) => tarea.id !== id);
+    setTareas(actualizaTareas);
+  }
+
   // Lo que se muestra en pantalla
   return (
     <div className="App">
@@ -105,6 +111,7 @@ function App() {
               ) : (
                 <button onClick={() => setEditarTarea(tarea.id)} className="btn btn-primary">  Editar</button>
               )}
+              <button onClick={() => eliminarTarea(tarea.id)} className="btn btn-danger">  Eliminar  </button>
           </div>
         ))}
           </li>
