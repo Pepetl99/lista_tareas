@@ -9,6 +9,7 @@ function App() {
   const [editarTarea, setEditarTarea] = React.useState(null); // Array para poder editar una tarea
   const [texto, setTexto] = React.useState(""); // Array para el texto
   const [fecha, setFecha] = React.useState(""); // Array para la fecha
+  const [hora, setHora] = React.useState(""); // Array para la hora
 
   // Función flecha para convertir la lista de tareas en cadena de texto como JSON
   React.useEffect(() => {
@@ -32,11 +33,13 @@ function App() {
       id: new Date().getTime(),
       text: tarea,
       date: fecha,
+      time: hora,
       completada: false,
     };
     setTareas([...tareas].concat(nuevaTarea));
     setTarea("");
     setFecha("");
+    setHora("");
   }
 
   // Función flecha para marcar una tarea como completada
@@ -87,6 +90,11 @@ function App() {
             <input type="date" onChange={(e) => setFecha(e.target.value)} value={fecha} className='form-control' 
             required min="2022-10-01"/>
           </div>
+          <div className='form-group'>
+            <label> Hora de Inicio:  </label>
+            <input type="time" onChange={(e) => setHora(e.target.value)} value={hora} className='form-control' 
+            required/>
+          </div>
           <br/>
           <div className='form-group' align="center">
             <button type="submit" className='btn btn-success'>  Agregar Tarea </button>
@@ -104,7 +112,7 @@ function App() {
               {tarea.id === editarTarea ? (
                 <input type="text" onChange={(e) => setTexto(e.target.value)} className="form-control"/>
               ) : (
-                <div> {tarea.text}  / Fecha:  {tarea.date}  </div>
+                <div> {tarea.text}  / Fecha:  {tarea.date}  / Hora: {tarea.time}  </div>
               )}
               {tarea.id === editarTarea ? (
                 <button onClick={() => editar(tarea.id)} className="btn btn-success">  Guardar </button>
